@@ -18,9 +18,16 @@ var Info = React.createClass({
     			<br/>
                 
                 <h5>gulp + webpack + react + reflux + immutable로 전환 중.</h5>
-                <h5>UI 수정/ 애니메이션 적용/ github 업로드 예정.</h5>
+                <h5>UI 수정/ 애니메이션 적용 예정.</h5>
                 <br/>
                 
+                <ul>
+                    <li>github 소스코드 업로드</li>
+                    <li>https://github.com/princeps05/praise2012/</li>
+                    <li>https://github.com/princeps05/praise2014/</li>
+                    <li>https://github.com/princeps05/praise2015/</li>
+                </ul>
+
     		</div>
     	);
 	}

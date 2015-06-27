@@ -2,7 +2,7 @@
 
 var Reflux = require('reflux'),
 	Immutable = require('immutable'),
-	DATA = require('../../data.json'),
+	DefaultDataBase = require('../utils/DefaultDataBase'),
 	HeaderActions = require('../actions/HeaderActions');
 
 var HeaderStore = Reflux.createStore({
@@ -16,7 +16,7 @@ var HeaderStore = Reflux.createStore({
 	},
 
 	initPraiseList: function() {
-		this._praiseList = Immutable.List(DATA);
+		this._praiseList = DefaultDataBase.getDefaultDataBase();
 	},
 
 	onGetNumberFilteredPraise: function(no) {

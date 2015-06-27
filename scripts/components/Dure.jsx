@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons'),
+var React = require('react'),
     RouteHandler = require("react-router").RouteHandler,
     Header = require('./Header.jsx'),
     FooterNav = require("./FooterNav.jsx");

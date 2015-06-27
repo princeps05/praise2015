@@ -2,7 +2,7 @@
 
 var Reflux = require('reflux'),
 	Immutable = require('immutable'),
-	DATA = require('../../data.json'),
+	DefaultDataBase = require('../utils/DefaultDataBase'),
 	PraiseActions = require('../actions/PraiseActions');
 
 var PraiseStore = Reflux.createStore({
@@ -17,7 +17,7 @@ var PraiseStore = Reflux.createStore({
 	},
 
 	initPraiseList: function() {
-		this._praiseList = Immutable.List(DATA);
+		this._praiseList = DefaultDataBase.getDefaultDataBase();
 	},
 
 	onGetAllPraiseList: function() {
@@ -49,16 +49,16 @@ var PraiseStore = Reflux.createStore({
 		}));
 	},
 
-	onGetPraiseRangeList: function(rangeNo) {
+	onGetPraiseRangeList: function(rangeSize) {
 
 		var praiseRangeList = [],
 			praiseRange = {},
 			length = this._praiseList.size;
 
-		for(var i=1; i<=length / rangeNo +1; i++)  {
+		for(var i=1; i<=length / rangeSize +1; i++)  {
 
-			praiseRange.endNo = i * rangeNo;
-			praiseRange.startNo = praiseRange.endNo - rangeNo+1;
+			praiseRange.endNo = i * rangeSize;
+			praiseRange.startNo = praiseRange.endNo - rangeSize+1;
 		 
 			if(praiseRange.endNo > length)   {
 				praiseRange.endNo = length;

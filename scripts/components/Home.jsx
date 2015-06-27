@@ -2,31 +2,19 @@ var React = require('react/addons'),
 	PureRenderMixin = React.addons.PureRenderMixin,
 	HeaderActions = require('../actions/HeaderActions'),
 	Swipeable = require('react-swipeable'),
-	DateTime = require('date-time-string');
+	DateTime = require('date-time-string'),
+	DefaultValueObj = require('../utils/DefaultValueSetting');
 
 var Home = React.createClass({
 
 	mixins: [PureRenderMixin],
 
-    propTypes: {
-        imgNo: React.PropTypes.number
-    },
-
 	getInitialState: function() {
-
-      	return {
-        	imgNo: 738
-      	};
+      	return DefaultValueObj.getDefaultHomeImgNo();
    	},
 
    	getDefaultProps: function() {
-
-   		return {
-        	imgNo: 738,
-        	minImgNo: 1,
-        	maxImgNo: 853,
-        	imgDir: 'http://vespasiani.cdn3.cafe24.com/dure'
-      	};
+   		return DefaultValueObj.getDefaultHomeValueObj();
    	},
 
    	touchImg: function() {
@@ -68,8 +56,10 @@ var Home = React.createClass({
 		if(!this.isValidImg(imgNo)) {	// 유효한 이미지 번호가 아닐 경우.
 			_imgNo = parseInt(localStorage.getItem("imgNo"));	// 로컬 스토리지에서 가져온 이미지 번호 저장.
 			if(!_imgNo){	// 로컬 스토리지에도 없는 경우.
-				_imgNo = parseInt(this.props.imgNo);	// 디폴트 이미지 번호 저장.
+				_imgNo = parseInt(this.props.imgNo);	// 디폴트 이미지 번호 저장.				
 			}
+
+			history.replaceState(null, _imgNo, this.getPath(_imgNo)); // url 대체
 		}
 
 		this.setState({ imgNo : _imgNo });
@@ -95,13 +85,11 @@ var Home = React.createClass({
 
 		var _imgNo = (direction === "right")? parseInt(this.state.imgNo) -1 : parseInt(this.state.imgNo) +1;
 
-		if(this.isValidImg(_imgNo)) {
-			history.pushState(null, _imgNo, this.getPath(_imgNo));
-		}
-		else {
+		if(!this.isValidImg(_imgNo)) {
 			_imgNo = (_imgNo > this.props.maxImgNo)? this.props.minImgNo : this.props.maxImgNo; 
-			history.pushState(null, _imgNo, this.getPath(_imgNo));
 		}
+
+		history.pushState(null, _imgNo, this.getPath(_imgNo));
 
 		this.setState({ imgNo : _imgNo });
 	},
@@ -117,7 +105,7 @@ var Home = React.createClass({
 	commonAction: function() {
 
 		HeaderActions.getNumberFilteredPraise(this.state.imgNo);	// 헤더 변경.
-		localStorage.setItem("imgNo", this.state.imgNo);	// 로컬 스토리지에 현재 이미지 번호 저장.
+		localStorage.setItem("imgNo", this.state.imgNo);	// 로컬스토리지에 현재 이미지 번호 저장.
 		this.saveHistory(this.state.imgNo);	// 로컬스토리지에 내역 저장.
 	},
 

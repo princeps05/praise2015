@@ -1,17 +1,15 @@
 var React = require('react/addons'),
 	PureRenderMixin = React.addons.PureRenderMixin,
 	PraiseOne = require('./PraiseOne.jsx'),
-	InfiniteScrollMixin = require('react-infinite-scroll-mixin');
+	InfiniteScrollMixin = require('react-infinite-scroll-mixin'),
+	DefaultValueObj = require('../utils/DefaultValueSetting');
 
 var FilteredPraiseList = React.createClass({
 
 	mixins: [InfiniteScrollMixin, PureRenderMixin],
 
    	getDefaultProps: function() {
-
-   		return {
-        	pageSize: 20
-      	};
+   		return DefaultValueObj.getDefaultPageSize();
    	},
 
 	componentWillMount: function() {

@@ -16,11 +16,12 @@ var React = require('react/addons'),
     Redirect = ReactRouter.Redirect;
 
 var routes = (
+  
    <Route name="dure" path="/" handler={Dure}>
    
-      <Route name="praiseRangeList" path="/praiseRangeList/" handler={PraiseRangeList} />
+      <Route name="praiseRangeList" path="/rangeList/" handler={PraiseRangeList} />
          
-      <Route name="praiseList" path="/praiseList/:startNo?/:endNo?/" handler={PraiseWrapper} />
+      <Route name="praiseList" path="/list/:startNo?/:endNo?/" handler={PraiseWrapper} />
 
       <Route name="search" path="/search/" handler={Search} />
       <Route name="home" path="/dure/:imgNo?" handler={Home} />
@@ -31,6 +32,7 @@ var routes = (
       <DefaultRoute handler={Home} />
       <NotFoundRoute handler={Home} />
       <Redirect from="/" to="home" />
+
    </Route>
 );
 

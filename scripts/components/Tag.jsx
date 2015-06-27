@@ -1,6 +1,6 @@
-var React = require('react/addons'),
-	DateTime = require('date-time-string'),
-	perf = React.addons.Perf;
+var React = require('react/addons');
+//	DateTime = require('date-time-string'),
+//	perf = React.addons.Perf;
 
 var Tag = React.createClass({
 	
@@ -11,7 +11,7 @@ var Tag = React.createClass({
 	},
 
 	componentDidMount: function() {
-		perf.start();
+//		perf.start();
 	},
 	componentWillMount: function() {
 
@@ -30,9 +30,9 @@ var Tag = React.createClass({
 
 	 //  	console.log(listObj);
 
-		perf.stop();
+//		perf.stop();
 //		perf.printExclusive();
-		perf.printWasted();
+//		perf.printWasted();
 //		perf.printDOM();
 	},	
 	render: function() {

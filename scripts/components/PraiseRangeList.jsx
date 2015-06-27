@@ -3,17 +3,15 @@ var React = require('react/addons'),
     PraiseStore = require('../stores/PraiseStore'),
     PraiseActions = require('../actions/PraiseActions'),
     PureRenderMixin = React.addons.PureRenderMixin,
-    PraiseRangeOne = require('./PraiseRangeOne.jsx');
+    PraiseRangeOne = require('./PraiseRangeOne.jsx'),
+    DefaultValueObj = require('../utils/DefaultValueSetting');
 
 var PraiseRangeList = React.createClass({
 
   mixins: [PureRenderMixin, Reflux.connect(PraiseStore, 'praiseRangeList')],
 
   getDefaultProps: function() {
-
-    return { 
-      rangeSize: 100
-    };
+    return DefaultValueObj.getDefaultRangeSize();
   },
 
   componentWillMount: function() {
