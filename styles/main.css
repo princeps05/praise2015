@@ -1,0 +1,113 @@
+.navbar-top	{
+	top: 0;
+  	border-width: 0 0 1px;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 1030;
+	height:35px;
+	background-color: #FFA6C9;
+}
+
+.navbar-top h5 {
+	color: floralwhite;
+	font-weight: bold;
+}
+
+.navbar-top span {
+ 	font-weight: bold;
+}
+
+.navbar-top h5 span#title {
+	padding-left: 6px;
+}
+
+.navbar-bottom	{
+	bottom: 0;
+	margin-bottom: 0;
+	border-width: 1px 0 0;
+	position: fixed;
+  	right: 0;
+  	left: 0;
+  	z-index: 1030;
+	height:40px;
+	background-color: #87CEEB;
+}
+
+.wrap	{
+	margin-top: 35px;
+	margin-bottom: 40px;
+}
+
+.wrap img{
+	width:100%; 
+	height:100%; 
+	padding:8px
+}
+
+a.list, a.search, a.tag, a.info {
+	width:19%;
+	height: 100%;
+	padding-top:10px;
+	text-decoration: none;
+}
+
+a.home {
+	width:24%;
+	height: 100%;
+	padding-top:10px;
+	text-decoration: none;
+}
+
+span.title {
+	margin-left: 14px;
+}
+
+span.dash {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
+#search .list-group-item, #search .input-group, #list .list-group-item {
+	padding: 12px 18px;
+	height: 45px;
+}
+#search input {
+	border-radius: 5px;
+}
+#search .list-group, #list .list-group {
+	margin-bottom: 30px;
+}
+#search .badge {
+	background-color: yellowgreen;
+}
+#list .badge {
+	background-color: cornflowerblue;
+}
+
+#list .list-group-item span.startNo {
+	margin-left: 20%;
+}
+#list .list-group-item span.glyphicon {
+	margin-right: 14%;
+}
+ 
+div.searchText {
+	width: 100%;
+}
+
+img.imageEnlargement {
+	width: 140%;
+}
+
+.backBtn {
+	height: 35px;
+	padding: 8px 14px;
+	position: fixed;
+	text-decoration: none !important;
+}
+
+a.active > span.icon {
+	color: greenyellow;
+}
