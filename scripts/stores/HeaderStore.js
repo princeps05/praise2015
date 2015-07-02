@@ -2,12 +2,13 @@
 
 var Reflux = require('reflux'),
 	Immutable = require('immutable'),
+	DateTime = require('date-time-string'),
 	DefaultDataBase = require('../utils/DefaultDataBase'),
-	HeaderActions = require('../actions/HeaderActions');
+	Actions = require('../actions/Actions');
 
-var HeaderStore = Reflux.createStore({
+var HeaderHistoryStore = Reflux.createStore({
 
-	listenables: [HeaderActions],
+	listenables: [Actions],
 
 	_praiseList: Immutable.List([]),
 
@@ -19,20 +20,53 @@ var HeaderStore = Reflux.createStore({
 		this._praiseList = DefaultDataBase.getDefaultDataBase();
 	},
 
-	onGetNumberFilteredPraise: function(no) {
+	onSaveHistoryPraise: function(imgNo) {
 
-		if(!no) {	// 악보 이외 페이지인 경우.
+		var _praise = this._praiseList.filter(function(praise){
+			return praise.no === imgNo;
+		});
+
+		var _nowDate = DateTime.toDateString(),
+			_todayPraiseList = JSON.parse(localStorage.getItem(_nowDate)),
+			_list = [];
+
+		if(_todayPraiseList) {
+			_list = _todayPraiseList;
+		}
+
+		_list.push(_praise.get(0));
+
+		localStorage.setItem(_nowDate, JSON.stringify( Immutable.List(_list) ));
+
+		this.trigger({ no: imgNo, title: _praise.get(0).title, hasPraise: true });
+	},
+
+	onChangeHeader: function(imgNo) {
+
+		if(!imgNo) {
 			this.trigger();
 			return;
 		}
-		
-	   	this.trigger(this._praiseList.get(parseInt(no) -1));		
+
+		var _imgNo = parseInt(imgNo),
+			_list = Immutable.List( this.getHistoryDate(DateTime.toDateString()) );
+
+		if(_list.size) {
+			var _praise = _list.filter(function(praise) {
+				return praise.no === _imgNo;
+			});
+
+			this.trigger({ no: _imgNo, title: this._praiseList.get(_imgNo -1).title, hasPraise: _praise.size? true : false });
+		}
+		else {
+			this.trigger(this._praiseList.get(_imgNo -1));
+		}
 	},
 
-	onGetTitleFilteredPraise: function() {
-	   		
-	},
+	getHistoryDate: function(date) {
+		return Immutable.List( JSON.parse(localStorage.getItem(date)) );
+	}
 
 });
 
-module.exports = HeaderStore;
+module.exports = HeaderHistoryStore;

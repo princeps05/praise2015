@@ -12,6 +12,8 @@
 .navbar-top h5 {
 	color: floralwhite;
 	font-weight: bold;
+	margin-left: 40px;
+  	margin-right: 40px;	
 }
 
 .navbar-top span {
@@ -31,7 +33,8 @@
   	left: 0;
   	z-index: 1030;
 	height:40px;
-	background-color: #87CEEB;
+	border-top: 1px solid #ddd;
+	background-color: ghostwhite;
 }
 
 .wrap	{
@@ -45,10 +48,10 @@
 	padding:8px
 }
 
-a.list, a.search, a.tag, a.info {
+a.list, a.search, a.history, a.info {
 	width:19%;
 	height: 100%;
-	padding-top:10px;
+	padding-top: 10px;
 	text-decoration: none;
 }
 
@@ -69,23 +72,24 @@ span.dash {
 }
 
 
-#search .list-group-item, #search .input-group, #list .list-group-item {
+#search .list-group-item, #search .input-group, #list .list-group-item, #history .list-group-item {
 	padding: 12px 18px;
 	height: 45px;
 }
 #search input {
 	border-radius: 5px;
 }
-#search .list-group, #list .list-group {
+#search .list-group, #list .list-group, #history .list-group {
 	margin-bottom: 30px;
 }
-#search .badge {
-	background-color: yellowgreen;
+#search .badge, #history .badge, #list .badge {
+	background-color: lightsalmon;
 }
+/*
 #list .badge {
 	background-color: cornflowerblue;
 }
-
+*/
 #list .list-group-item span.startNo {
 	margin-left: 20%;
 }
@@ -101,13 +105,50 @@ img.imageEnlargement {
 	width: 140%;
 }
 
-.backBtn {
+.navbar-top span.backBtn {
+	width: 45px;
 	height: 35px;
-	padding: 8px 14px;
+	padding: 7px 14px;
 	position: fixed;
-	text-decoration: none !important;
+	font-size: 20px;
+	top: 0;
+	left: 0;	
+}
+
+.navbar-top span.history {
+	width: 45px;
+	height: 35px;
+	padding: 7px 14px;
+	position: fixed;
+	font-size: 20px;
+	color: gainsboro;
+	top: 0;
+	right: 0;	
+}
+
+.navbar-top span.history.hasPraise {
+  color: cornflowerblue;
 }
 
 a.active > span.icon {
-	color: greenyellow;
+	color: #FFA6C9;
+}
+
+.b_clear {
+  position: absolute;
+  top: 11px;
+  right: 15px;
+  z-index: 3000;
+  display: inline-block;
+  padding: 6px 8px 6px 8px;
+  font-size: 22px;
+  color: #9D9B9B;
+}
+
+span.right {
+  font-size: x-large;
+  display: inline-block;
+  position: absolute;
+  top: 9px;
+  right: 16px;
 }

@@ -3,11 +3,11 @@
 var Reflux = require('reflux'),
 	Immutable = require('immutable'),
 	DefaultDataBase = require('../utils/DefaultDataBase'),
-	PraiseActions = require('../actions/PraiseActions');
+	Actions = require('../actions/Actions');
 
 var PraiseStore = Reflux.createStore({
 
-	listenables: [PraiseActions],
+	listenables: [Actions],
 
 	_praiseList: Immutable.List([]),
 	_filterText: '',

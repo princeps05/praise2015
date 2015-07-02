@@ -5,9 +5,10 @@ var React = require('react/addons'),
     Dure = require('./Dure.jsx'),
     Home = require('./Home.jsx'),
     PraiseWrapper = require('./PraiseWrapper.jsx'),
+    HistoryWrapper = require('./HistoryWrapper.jsx'),
     Search = require('./Search.jsx'),
     PraiseRangeList = require('./PraiseRangeList.jsx'),
-    Tag = require('./Tag.jsx'),
+    HistoryList = require('./HistoryList.jsx'),
     Info = require('./Info.jsx'),
 
     Route = ReactRouter.Route,
@@ -22,11 +23,12 @@ var routes = (
       <Route name="praiseRangeList" path="/rangeList/" handler={PraiseRangeList} />
          
       <Route name="praiseList" path="/list/:startNo?/:endNo?/" handler={PraiseWrapper} />
+      <Route name="dateList" path="/list/:date?/" handler={HistoryWrapper} />
 
       <Route name="search" path="/search/" handler={Search} />
       <Route name="home" path="/dure/:imgNo?" handler={Home} />
 
-      <Route name="tag" path="/tag/" handler={Tag} />
+      <Route name="historyList" path="/historyList/" handler={HistoryList} />
       <Route name="info" path="/info/" handler={Info} />
 
       <DefaultRoute handler={Home} />

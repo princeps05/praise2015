@@ -10,7 +10,7 @@ var PraiseRangeOne = React.createClass({
 			   	<span className="badge pull-left startNo">{this.props.praiseRange.startNo}</span>
 			   	<span className="pull-left dash">~</span>
 			  	<span className="badge pull-left endNo">{this.props.praiseRange.endNo}</span>
-			   	<span className="pull-right icon-chevron_right"></span>
+			   	<span className="right icon-keyboard_arrow_right"></span>
 		   	</Link>
     	);
 	}

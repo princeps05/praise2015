@@ -1,7 +1,7 @@
 var React = require('react/addons'),
     Reflux = require('reflux'),
     PraiseStore = require('../stores/PraiseStore'),
-    PraiseActions = require('../actions/PraiseActions'),
+    Actions = require('../actions/Actions'),
     PureRenderMixin = React.addons.PureRenderMixin,
     PraiseRangeOne = require('./PraiseRangeOne.jsx'),
     DefaultValueObj = require('../utils/DefaultValueSetting');
@@ -15,7 +15,7 @@ var PraiseRangeList = React.createClass({
   },
 
   componentWillMount: function() {
-    PraiseActions.getPraiseRangeList(this.props.rangeSize);
+    Actions.getPraiseRangeList(this.props.rangeSize);
   },
 
   render: function() {
@@ -27,17 +27,17 @@ var PraiseRangeList = React.createClass({
               {
                 this.state.praiseRangeList.map(function(praiseRange){
                   return (<PraiseRangeOne key={praiseRange.startNo} praiseRange={praiseRange} />);
-              })
-            }
+                })
+              }
           </div>
         </div>
         );
     }
     else  {
       return false;
-    }
-    
+    }    
   }
+
 });   
 
 module.exports = PraiseRangeList;

@@ -1,13 +1,10 @@
 var React = require('react/addons'),
-	PureRenderMixin = React.addons.PureRenderMixin,
-	HeaderActions = require('../actions/HeaderActions'),
+	Reflux = require('reflux'),
+	Actions = require('../actions/Actions'),
 	Swipeable = require('react-swipeable'),
-	DateTime = require('date-time-string'),
 	DefaultValueObj = require('../utils/DefaultValueSetting');
 
 var Home = React.createClass({
-
-	mixins: [PureRenderMixin],
 
 	getInitialState: function() {
       	return DefaultValueObj.getDefaultHomeImgNo();
@@ -22,24 +19,6 @@ var Home = React.createClass({
    		imgNode.className = (imgNode.className.indexOf('imageEnlargement') > -1)? '' : 'imageEnlargement';
   	},
 
-  	saveHistory: function(imgNo) {
-
-    //   	Utility.getPraiseTitle(imgNo).then(function(title) {
-
-	  	// 	var nowDate = DateTime.toDateString(),
-	  	// 		item = localStorage.getItem(nowDate),
-	  	// 		list = [];
-
-	  	// 	if(item) {
-	  	// 		list = item.split(",");
-	  	// 	}
-
-  		// 	list.push(this.state.imgNo + "장 " + title);
- 			// localStorage.setItem(nowDate, list);
-
-    //     }.bind(this));
-  	},
-
   	isValidImg: function(imgNo) {
   		var _imgNo = parseInt(imgNo);
   		return (_imgNo <= this.props.maxImgNo && _imgNo >= this.props.minImgNo)? true : false; 
@@ -52,9 +31,9 @@ var Home = React.createClass({
   	setParamImgNo: function(imgNo) {
 
   		var _imgNo = parseInt(imgNo);
-
 		if(!this.isValidImg(imgNo)) {	// 유효한 이미지 번호가 아닐 경우.
-			_imgNo = parseInt(localStorage.getItem("imgNo"));	// 로컬 스토리지에서 가져온 이미지 번호 저장.
+			
+			_imgNo = parseInt(sessionStorage.getItem("imgNo"));	// 로컬 스토리지에서 가져온 이미지 번호 저장.
 			if(!_imgNo){	// 로컬 스토리지에도 없는 경우.
 				_imgNo = parseInt(this.props.imgNo);	// 디폴트 이미지 번호 저장.				
 			}
@@ -65,16 +44,16 @@ var Home = React.createClass({
 		this.setState({ imgNo : _imgNo });
   	},
 
-	componentWillMount: function() {	// 첫 랜더링 직전 호출.
-		this.setParamImgNo(this.props.params.imgNo);
+	componentWillMount: function() {	// 첫 로딩시.
+		this.setParamImgNo(this.props.params.imgNo);		
 	},
 
-	componentWillReceiveProps: function(nextProps) {	// 새로운 값을 받았을 때 호출.
+	componentWillReceiveProps: function(nextProps) {	// 파라미터 업데이트 시.
 		this.setParamImgNo(nextProps.params.imgNo);
 	},
 
 	getPath: function(imgNo) {
-		return location.href.indexOf("localhost") > -1? "/#/dure/" + imgNo : "/praise/#/dure/" + imgNo;
+		return location.href.indexOf("localhost") > -1? "/#/dure/" + imgNo : location.href.indexOf("dev") > -1? "/dev/#/dure/" + imgNo : "/praise/#/dure/" + imgNo;
 	},
 
 	setSwipeImgNo: function(direction) {
@@ -103,29 +82,25 @@ var Home = React.createClass({
 	},
 
 	commonAction: function() {
-
-		HeaderActions.getNumberFilteredPraise(this.state.imgNo);	// 헤더 변경.
-		localStorage.setItem("imgNo", this.state.imgNo);	// 로컬스토리지에 현재 이미지 번호 저장.
-		this.saveHistory(this.state.imgNo);	// 로컬스토리지에 내역 저장.
+		Actions.changeHeader(this.state.imgNo);	// 헤더에 저장 상태 변경.
+		sessionStorage.setItem("imgNo", this.state.imgNo);	// 세션스토리지에 현재 이미지 번호 저장.
 	},
 
 	render: function() {
 		
 		this.commonAction();	// 공통 작업.
 
-		var _imgDir = this.props.imgDir + this.state.imgNo + ".jpg";
-
 	    return (
 	    	<div className="wrap" id="home">
 	    		<Swipeable onSwipedRight={this.swipedRight} onSwipedLeft={this.swipedLeft} >
-					<img alt="praise" ref="praiseImg" src={_imgDir} onClick={this.touchImg} />
+					<img alt="praise" ref="praiseImg" src={this.props.imgDir + this.state.imgNo + ".jpg"} onClick={this.touchImg} />
 				</Swipeable>
 			</div>
     	);
 	},
 
-	componentWillUnmount: function() {
-		HeaderActions.getNumberFilteredPraise();
+	componentWillUnmount: function() {	// 헤더 초기화
+		Actions.changeHeader();
 	},
 });
 

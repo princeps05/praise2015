@@ -1,19 +1,19 @@
 var React = require('react/addons'),
     Reflux = require('reflux'),
-    PraiseStore = require('../stores/PraiseStore'),
+    HistoryStore = require('../stores/HistoryStore'),
     Actions = require('../actions/Actions'),
     FilteredPraiseList = require('./FilteredPraiseList.jsx');
 
-var PraiseWrapper = React.createClass({
+var HistoryWrapper = React.createClass({
 
-    mixins: [Reflux.connect(PraiseStore, 'praiseList')],
+    mixins: [Reflux.connect(HistoryStore, 'praiseList')],
 
     componentWillMount: function() {
-        Actions.getNumberFilteredPraiseList(this.props.params.startNo, this.props.params.endNo);
+        Actions.loadHistoryPraiseList(this.props.params.date);
     },
 
     componentWillReceiveProps: function(nextProps) {
-        Actions.getNumberFilteredPraiseList(nextProps.params.startNo, nextProps.params.endNo);
+        Actions.loadHistoryPraiseList(nextProps.params.date);
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
@@ -21,7 +21,7 @@ var PraiseWrapper = React.createClass({
     },
 
 	render: function() {
-
+        
         if(this.state.praiseList && this.state.praiseList.size) {
     	    return ( 
                 <div className="wrap" id="list">
@@ -35,4 +35,4 @@ var PraiseWrapper = React.createClass({
 	}
 });
 
-module.exports = PraiseWrapper;
+module.exports = HistoryWrapper;
