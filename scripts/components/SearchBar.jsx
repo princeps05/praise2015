@@ -3,24 +3,20 @@ var React = require('react'),
 
 var SearchBar = React.createClass({
 
-    componentWillMount: function() {
-    	Actions.getTextFilteredPraiseList();
-    },
-
     handleChange: function() {
-    	Actions.getTextFilteredPraiseList(React.findDOMNode(this.refs.filterText).value.trim());
+        this.props.onUserInput( React.findDOMNode(this.refs.filterText).value.trim() );    	
     },	
 	
     removeTextFilter: function() {
 
-    	var _filterText = React.findDOMNode(this.refs.filterText).value.trim();
-    	if(_filterText) {
-	    	React.findDOMNode(this.refs.filterText).value = '';
-	    	Actions.getTextFilteredPraiseList();
+    	var _filterText = React.findDOMNode(this.refs.filterText);
+    	if(_filterText.value.trim()) {
+	    	_filterText.value = '';
+	    	this.props.onUserInput();
     	}
     },
 
-	render: function() {
+	render: function() {             console.log('SearchBar render');
 
 	    return (
 		    <div className="input-group searchText">

@@ -6,7 +6,7 @@ var HeaderRight = React.createClass({
 
   saveHistory: function() {
 
-    if(React.findDOMNode(this.refs.history).className.indexOf('hasPraise') > -1? true : false) {
+    if(React.findDOMNode(this.refs.history).className.indexOf('hasPraise') > -1) {
       return;
     }
 

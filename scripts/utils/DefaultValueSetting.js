@@ -10,7 +10,7 @@ var DefaultValueSetting = {
 
     RANGE_SIZE: 100,
     
-    PAGE_SIZE: 20,
+    PAGE_SIZE: 24,
 
 	getDefaultHomeValueObj: function() {
 

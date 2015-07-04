@@ -12,7 +12,7 @@ var HeaderHistoryStore = Reflux.createStore({
 
 	_praiseList: Immutable.List([]),
 
-	init: function() {		
+	init: function() {
 		this.initPraiseList();
 	},
 
@@ -66,7 +66,6 @@ var HeaderHistoryStore = Reflux.createStore({
 	getHistoryDate: function(date) {
 		return Immutable.List( JSON.parse(localStorage.getItem(date)) );
 	}
-
 });
 
 module.exports = HeaderHistoryStore;

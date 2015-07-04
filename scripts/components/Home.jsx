@@ -6,10 +6,6 @@ var React = require('react/addons'),
 
 var Home = React.createClass({
 
-	getInitialState: function() {
-      	return DefaultValueObj.getDefaultHomeImgNo();
-   	},
-
    	getDefaultProps: function() {
    		return DefaultValueObj.getDefaultHomeValueObj();
    	},
@@ -44,11 +40,13 @@ var Home = React.createClass({
 		this.setState({ imgNo : _imgNo });
   	},
 
-	componentWillMount: function() {	// 첫 로딩시.
-		this.setParamImgNo(this.props.params.imgNo);		
+	componentWillMount: function() {	// 첫 로딩시.		
+		console.log('componentWillMount', this.props.params.imgNo);
+		this.setParamImgNo(this.props.params.imgNo);
 	},
 
 	componentWillReceiveProps: function(nextProps) {	// 파라미터 업데이트 시.
+		console.log('componentWillReceiveProps', nextProps.imgNo);
 		this.setParamImgNo(nextProps.params.imgNo);
 	},
 
@@ -87,16 +85,25 @@ var Home = React.createClass({
 	},
 
 	render: function() {
-		
-		this.commonAction();	// 공통 작업.
+		console.log('render', this.state);
 
-	    return (
-	    	<div className="wrap" id="home">
-	    		<Swipeable onSwipedRight={this.swipedRight} onSwipedLeft={this.swipedLeft} >
-					<img alt="praise" ref="praiseImg" src={this.props.imgDir + this.state.imgNo + ".jpg"} onClick={this.touchImg} />
-				</Swipeable>
-			</div>
-    	);
+		if(this.state) {
+
+			setTimeout(function () {
+				this.commonAction();	// 공통 작업.
+			}.bind(this), 1);
+		    
+		    return (
+		    	<div className="wrap" id="home">
+		    		<Swipeable onSwipedRight={this.swipedRight} onSwipedLeft={this.swipedLeft} >
+						<img alt="praise" ref="praiseImg" src={this.props.imgDir + this.state.imgNo + ".jpg"} onClick={this.touchImg} />
+					</Swipeable>
+				</div>
+	    	);
+		}
+		else {
+			return false;
+		}
 	},
 
 	componentWillUnmount: function() {	// 헤더 초기화

@@ -10,7 +10,6 @@ var PraiseStore = Reflux.createStore({
 	listenables: [Actions],
 
 	_praiseList: Immutable.List([]),
-	_filterText: '',
 
 	init: function() {		
 		this.initPraiseList();
@@ -20,33 +19,46 @@ var PraiseStore = Reflux.createStore({
 		this._praiseList = DefaultDataBase.getDefaultDataBase();
 	},
 
-	onGetAllPraiseList: function() {
-		this.trigger(this._praiseList);
+	onGetTextFilteredPraiseList: function(nextPage, filterText) {	// 메모이즈 적용 고려 중. 
+
+		var _list = this._praiseList,
+			_filterText =  filterText;
+
+		if(_filterText) {
+
+			_list = this._praiseList.filter(function(praise){
+				return (praise.no.toString().indexOf(filterText) > -1 || praise.title.indexOf(_filterText) > -1);			
+			});
+		}
+
+		var	_length = _list.size,
+			_nextPage = parseInt(nextPage),
+			_endNo = _nextPage * 25,
+			_startNo = _endNo - 25;
+
+		if(_endNo > _length)	{
+			_endNo = _length;
+		}
+
+		Actions.getTextFilteredPraiseList.completed({praiseList:_list.slice(_startNo, _endNo), nextPage: nextPage, maxPage: Math.ceil(_length / 25)});
 	},
 
-	onGetTextFilteredPraiseList: function(filterText) {	// 검색에 메모이즈 적용 고려 중. 
+	onGetNumberFilteredPraiseList: function(nextPage, startNo, endNo) {	// 메모이즈 적용 고려 중.
 
-		if(this._filterText === filterText) { // 같은거 연속 검색 방지.
-			return;
-		}
-
-		if(!filterText) {	// 첫 랜더링 시.
-			return this.trigger(this._praiseList);
-		}
-		else {
-
-			this._filterText = filterText;
-			this.trigger(this._praiseList.filter(function(praise){
-				return (praise.no.toString().indexOf(this._filterText) > -1 || praise.title.indexOf(this._filterText) > -1);			
-			}.bind(this)));
-		}
-	},
-
-	onGetNumberFilteredPraiseList: function(startNo, endNo) {
-
-		this.trigger(this._praiseList.filter(function(praise){
+		var _list = this._praiseList.filter(function(praise){
 			return (praise.no >= startNo && praise.no <= endNo);
-		}));
+		});
+
+		var	_length = _list.size,
+			_nextPage = parseInt(nextPage),
+			_endNo = _nextPage * 35,
+			_startNo = _endNo - 35;
+
+		if(_endNo > _length)	{
+			_endNo = _length;
+		}	
+
+		Actions.getNumberFilteredPraiseList.completed({praiseList:_list.slice(_startNo, _endNo), nextPage: nextPage, maxPage: Math.ceil(_length / 35)});
 	},
 
 	onGetPraiseRangeList: function(rangeSize) {

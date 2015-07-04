@@ -22,8 +22,8 @@ var routes = (
    
       <Route name="praiseRangeList" path="/rangeList/" handler={PraiseRangeList} />
          
-      <Route name="praiseList" path="/list/:startNo?/:endNo?/" handler={PraiseWrapper} />
-      <Route name="dateList" path="/list/:date?/" handler={HistoryWrapper} />
+      <Route name="praiseList" path="/praiseList/:startNo?/:endNo?/" handler={PraiseWrapper} />
+      <Route name="dateList" path="/dateList/:date?/" handler={HistoryWrapper} />
 
       <Route name="search" path="/search/" handler={Search} />
       <Route name="home" path="/dure/:imgNo?" handler={Home} />
