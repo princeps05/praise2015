@@ -13,7 +13,7 @@ var Header = React.createClass({
 	},
 
 	render: function() {
-	
+		
 		return (
 			<div className="navbar-top">
 				<span className="icon icon-undo pull-left backBtn" onClick={this.goBack}></span>

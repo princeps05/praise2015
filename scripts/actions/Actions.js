@@ -1,8 +1,6 @@
 'use strict';
 
-var Reflux = require('reflux'),
-	Immutable = require('immutable'),
-	Request = require('superagent');
+var Reflux = require('reflux');
 
 var Actions = Reflux.createActions({
 
@@ -19,19 +17,5 @@ var Actions = Reflux.createActions({
 	'getPraiseList' : {}
 
 });
-
-Actions.getPraiseList.listen(function() {
-
-	Request.get('../../data.json').end(function(err, res) {
-
-		if(res) {
-			Actions.completed(Immutable.List(res.body));
-		}
-		else {
-			Actions.failed(res.err);
-		}
-	});
-});
-
 
 module.exports = Actions;

@@ -14,7 +14,7 @@ var HeaderTitle = React.createClass({
 			);
 		}
 		else {
-			return <h5 className="text-center">두레교회</h5>
+			return <h5 className="text-center">두레찬양</h5>
 		}
 	}
 });

@@ -16,7 +16,7 @@ var SearchBar = React.createClass({
     	}
     },
 
-	render: function() {             console.log('SearchBar render');
+	render: function() {
 
 	    return (
 		    <div className="input-group searchText">

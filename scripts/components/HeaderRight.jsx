@@ -13,16 +13,19 @@ var HeaderRight = React.createClass({
     Actions.saveHistoryPraise(this.props.praise.no);
   },
 
-	render: function() {
+  pageRefresh: function() {
+    location.reload();
+  },
 
+	render: function() {
+    
     if(this.props.praise) {
 
       var _class = this.props.praise.hasPraise? "icon icon-check history hasPraise" : "icon icon-check history";
-  		
-  	  return (<span className={_class} ref='history' onClick={this.saveHistory}></span>);
+   	  return (<span className={_class} ref='history' onClick={this.saveHistory}></span>);
     }
     else {
-      return false;
+      return (<span className='icon icon-loop refresh' onClick={this.pageRefresh}></span>);
     }
 	}
 });

@@ -16,7 +16,7 @@ var PraiseStore = Reflux.createStore({
 	},
 
 	initPraiseList: function() {
-		this._praiseList = DefaultDataBase.getDefaultDataBase();
+		this._praiseList = DefaultDataBase.getDefaultDataBase();	// 수정 중.
 	},
 
 	onGetTextFilteredPraiseList: function(nextPage, filterText) {	// 메모이즈 적용 고려 중. 
@@ -26,7 +26,7 @@ var PraiseStore = Reflux.createStore({
 
 		if(_filterText) {
 
-			_list = this._praiseList.filter(function(praise){
+			_list = _list.filter(function(praise){
 				return (praise.no.toString().indexOf(filterText) > -1 || praise.title.indexOf(_filterText) > -1);			
 			});
 		}

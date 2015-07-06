@@ -41,12 +41,10 @@ var Home = React.createClass({
   	},
 
 	componentWillMount: function() {	// 첫 로딩시.		
-		console.log('componentWillMount', this.props.params.imgNo);
 		this.setParamImgNo(this.props.params.imgNo);
 	},
 
-	componentWillReceiveProps: function(nextProps) {	// 파라미터 업데이트 시.
-		console.log('componentWillReceiveProps', nextProps.imgNo);
+	componentWillReceiveProps: function(nextProps) {	// 파라미터 업데이트 시.		
 		this.setParamImgNo(nextProps.params.imgNo);
 	},
 
@@ -85,8 +83,7 @@ var Home = React.createClass({
 	},
 
 	render: function() {
-		console.log('render', this.state);
-
+		
 		if(this.state) {
 
 			setTimeout(function () {
@@ -106,7 +103,7 @@ var Home = React.createClass({
 		}
 	},
 
-	componentWillUnmount: function() {	// 헤더 초기화
+	componentWillUnmount: function() {	// 헤더 초기화	
 		Actions.changeHeader();
 	},
 });
