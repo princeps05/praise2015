@@ -42,7 +42,7 @@
 	margin-bottom: 40px;
 }
 
-.wrap img{
+#home.wrap img {
 	width:100%; 
 	height:100%; 
 	padding:8px
@@ -183,4 +183,22 @@ div.loader {
 
 div.noResult {
 	margin: 14px 20px 0 20px;
+}
+
+.wrap .list-group > div {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.wrap .list-group > div a {
+	position: relative !important;
+    -webkit-transform: translateZ(0px);
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-perspective: 1000;    
+}
+
+.kakao {
+	padding-bottom: 14px;
 }
