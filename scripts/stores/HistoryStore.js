@@ -16,7 +16,7 @@ var HistoryStore = Reflux.createStore({
 			_historyDateList = _historyDateList.push(localStorage.key(i));
 		}
 
-		this.trigger(_historyDateList);
+		Actions.loadHistoryDateList.completed(_historyDateList);
 	},
 
 	onLoadHistoryPraiseList: function(nextPage, date) {
@@ -37,7 +37,7 @@ var HistoryStore = Reflux.createStore({
 
 	getHistoryDate: function(date) {
 		return Immutable.List( JSON.parse(localStorage.getItem(date)) );
-	}	
+	}
 });
 
 module.exports = HistoryStore;

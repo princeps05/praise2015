@@ -43,9 +43,13 @@
 }
 
 #home.wrap img {
-	width:100%; 
-	height:100%; 
-	padding:8px
+	width: 100%; 
+	height: 100%; 
+	padding: 8px
+}
+
+#home.wrap img.imageEnlargement {
+	width: 140% !important;
 }
 
 a.list, a.search, a.history, a.info {
@@ -85,11 +89,7 @@ span.dash {
 #search .badge, #history .badge, #list .badge {
 	background-color: lightsalmon;
 }
-/*
-#list .badge {
-	background-color: cornflowerblue;
-}
-*/
+
 #list .list-group-item span.startNo {
 	margin-left: 20%;
 }
@@ -99,10 +99,6 @@ span.dash {
  
 div.searchText {
 	width: 100%;
-}
-
-img.imageEnlargement {
-	width: 140%;
 }
 
 .navbar-top span.backBtn {
@@ -185,20 +181,26 @@ div.noResult {
 	margin: 14px 20px 0 20px;
 }
 
+div.noHistory {
+	margin: 54px 20px 0 20px;	
+}
+
 .wrap .list-group > div {
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    /*height: 100%;*/
+    /*overflow-x: hidden;*/
+/*    overflow-y: scroll;*/
     -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-perspective: 1000;  
 }
 
 .wrap .list-group > div a {
-	position: relative !important;
-    -webkit-transform: translateZ(0px);
-	-webkit-transform: translate3d(0,0,0);
-	-webkit-perspective: 1000;    
+/*	position: relative !important;*/
+  
 }
 
 .kakao {
 	padding-bottom: 14px;
+	text-decoration: none;
 }

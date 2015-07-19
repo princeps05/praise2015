@@ -38,9 +38,10 @@ var routes = (
    </Route>
 );
 
+
 ReactRouter.run(routes, function (Handler) {
+  
+  attachFastClick(document.body);
 
-   attachFastClick(document.body);
-
-   React.render(<Handler />, document.body);
+  React.render(<Handler />, document.body);
 });

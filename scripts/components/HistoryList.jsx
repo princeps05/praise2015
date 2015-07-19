@@ -2,12 +2,15 @@ var React = require('react/addons'),
     Reflux = require('reflux'),
     HistoryStore = require('../stores/HistoryStore'),
     Actions = require('../actions/Actions'),
-    PureRenderMixin = React.addons.PureRenderMixin,
     HistoreOne = require('./HistoryOne.jsx');
 
 var HistoryList = React.createClass({
 
-  mixins: [PureRenderMixin, Reflux.connect(HistoryStore, 'historyDateList')],
+  mixins: [Reflux.listenTo(Actions.loadHistoryDateList.completed, 'getHistoryDateList')],
+
+  getHistoryDateList: function(historyDateList) {
+    this.setState({ 'historyDateList': historyDateList });
+  },
 
   componentWillMount: function() {
     Actions.loadHistoryDateList();
@@ -15,22 +18,31 @@ var HistoryList = React.createClass({
 
   render: function() {
 
-    if(this.state.historyDateList) {
-      return (
-        <div className="wrap" id="history">  
-          <div className="list-group">
-            {
-              this.state.historyDateList.map(function(date, index) {
-                return <HistoreOne key={index} date={date} />;
-              })
-            }
+    if(this.state) {
+    
+      if(this.state.historyDateList.size) {
+
+        return (
+          <div className="wrap" id="history">  
+            <div className="list-group">
+              {
+                this.state.historyDateList.map(function(date, index) {
+                  return <HistoreOne key={index} date={date} />;
+                })
+              }
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
+      else {
+        return (
+          <div className="alert alert-success noHistory text-center">저장한 찬양이 없습니다.</div>
+        )
+      }  
     }
-    else  {
+    else {
       return false;
-    }    
+    }
   }
 
 });   

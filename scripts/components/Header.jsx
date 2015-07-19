@@ -1,19 +1,19 @@
 var React = require('react'),
 	Reflux = require('reflux'),
-    HeaderStore = require('../stores/HeaderStore'),
+    PraiseStore = require('../stores/PraiseStore'),
 	HeaderTitle = require('./HeaderTitle.jsx'),
 	HeaderRight = require('./HeaderRight.jsx');
 
 var Header = React.createClass({
 
-	mixins: [Reflux.connect(HeaderStore, 'praise')],
+	mixins: [Reflux.connect(PraiseStore, 'praise')],
 
 	goBack: function() {
 		history.back();
 	},
 
 	render: function() {
-		
+
 		return (
 			<div className="navbar-top">
 				<span className="icon icon-undo pull-left backBtn" onClick={this.goBack}></span>

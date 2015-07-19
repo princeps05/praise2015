@@ -2,16 +2,19 @@ var React = require('react/addons'),
     Reflux = require('reflux'),
     PraiseStore = require('../stores/PraiseStore'),
     Actions = require('../actions/Actions'),
-    PureRenderMixin = React.addons.PureRenderMixin,
     PraiseRangeOne = require('./PraiseRangeOne.jsx'),
     DefaultValueObj = require('../utils/DefaultValueSetting');
 
 var PraiseRangeList = React.createClass({
 
-  mixins: [PureRenderMixin, Reflux.connect(PraiseStore, 'praiseRangeList')],
+  mixins: [Reflux.listenTo(Actions.getPraiseRangeList.completed, 'getPraiseRangeList')],
 
   getDefaultProps: function() {
     return DefaultValueObj.getDefaultRangeSize();
+  },
+
+  getPraiseRangeList: function(praiseRangeList) {
+    this.setState({ 'praiseRangeList': praiseRangeList });
   },
 
   componentWillMount: function() {
@@ -20,7 +23,7 @@ var PraiseRangeList = React.createClass({
 
   render: function() {
 
-    if(this.state.praiseRangeList) {
+    if(this.state && this.state.praiseRangeList.size) {
         return (
           <div className="wrap" id="list">  
             <div className="list-group">

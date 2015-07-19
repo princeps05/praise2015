@@ -10,7 +10,7 @@ var HeaderRight = React.createClass({
       return;
     }
 
-    Actions.saveHistoryPraise(this.props.praise.no);
+    Actions.saveHistoryPraise(this.props.praise.no, this.props.praise.title);
   },
 
   pageRefresh: function() {

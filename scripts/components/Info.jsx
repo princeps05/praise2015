@@ -31,7 +31,7 @@ var Info = React.createClass({
           <div className="panel-body">
 
             <ul className="list-group">
-              <a id="kakao-link-btn" ref="kakao"><img className="kakao" src="http://vespasiani.cdn3.cafe24.com/img/kakao.png" /></a>
+              <a id="kakao-link-btn" ref="kakao"><img className="kakao" src="http://vespasiani.cdn3.cafe24.com/img/kakao.png" /> 두레찬양 링크 공유</a>
               <li className="list-group-item list-group-item-info">두레찬양 모바일 웹</li>
             </ul>
 
@@ -40,7 +40,7 @@ var Info = React.createClass({
               <li className="list-group-item">악보에서 상단 오른쪽에 V터치해서 내역 저장</li>
               <li className="list-group-item">인터넷 사용정보 삭제 시 내역 초기화</li>
               <li className="list-group-item">전반적인 UI 및 내부 구조 수정 중</li>
-              <li className="list-group-item">react + reflux + immutable</li>
+              <li className="list-group-item">react + reflux</li>
             </ul>
             
             <div className="list-group">
